@@ -1,12 +1,12 @@
 <?php
 
-  abstract class Cuenta {
+  class Cuenta {
     protected $CBU;
     protected $balance;
     protected $fechaUltMov;
 
     public function __construct($CBU){
-      $this->CBU = $CBU;
+      $this->setCBU($CBU);
     }
 
     public function setCBU ($CBU){
@@ -31,9 +31,10 @@
       return $this->fechaUltMov;
     }
 
-    public abstract function debitar($monto, $metodo);
+    public abstract function debitar($monto, $origen);
 
     public function acreditar ($monto){
-      $this->balance = $balance + $monto;
+      $this->balance = $this->balance + $monto;
+      $this->fechaUltMov = date ();
     }
   }

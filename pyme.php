@@ -1,16 +1,17 @@
 <?php
 
   include_once ("cliente.php");
+  include_once ("liquidable.php");
+  include_once ("persona.php");
 
-  class PYME extends Cliente{
+  class PYME extends Cliente implements Liquidable{
     protected $CUIT;
     protected $razonSocial;
 
     public function __construct($CUIT, $razonSocial, $email, $pass){
+      parent::__construct($email, $pass);
       $this->CUIT = $CUIT;
       $this->razonSocial = $razonSocial;
-      $this->email = $email;
-      $this->pass = $pass;
     }
 
     public function setCuit($CUIT){
@@ -41,5 +42,10 @@
     }
     public function getPass(){
       return $this->pass;
+    }
+
+    public function liquidarHaberes(Persona $persona, $monto){
+      $persona->balance = $persona->balance + $monto;
+      $this->balance = $this->balance - ($monto * 1 / 100);
     }
   }

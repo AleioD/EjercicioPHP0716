@@ -9,12 +9,11 @@
     protected $nacimiento;
 
     public function __construct($nombre, $apellido, $documento, $nacimiento, $email, $pass){
+      parent::__construct($email, $pass);
       $this->nombre = $nombre;
       $this->apellido = $apellido;
       $this->documento = $documento;
       $this->nacimiento = $nacimiento;
-      $this->email = $email;
-      $this->pass = $pass;
     }
 
     public function setNombre($nombre){
